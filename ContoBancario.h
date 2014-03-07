@@ -19,6 +19,7 @@ public:
     virtual double deposita(double);
     virtual ContoBancario* clona() const;
     virtual string toString() const;
+    virtual bool operator==(const ContoBancario&) const;
 private:
     double saldo;
     string nome;

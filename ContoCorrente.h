@@ -13,7 +13,6 @@ public:
     double preleva(double);
     ContoCorrente* clona() const;
     string toString() const;
-
 private:
     static double commissionePrelievo;
 };

@@ -58,3 +58,7 @@ string ContoBancario::toString() const {
             "\t SALDO: " + dts.str() + "\n";
     return s;
 }
+
+bool ContoBancario::operator ==(const ContoBancario& cb) const {
+    return nome == cb.nome && cognome == cb.cognome && saldo == cb.saldo;
+}
