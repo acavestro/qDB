@@ -1,5 +1,6 @@
 #include "ContoBancario.h"
 #include <string>
+#include <sstream>
 using std::string;
 
 ContoBancario::ContoBancario(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale):
@@ -48,4 +49,12 @@ void ContoBancario::setCognome(string newCognome) {
 //allocata sullo heap. ATTENZIONE AL GARBAGE!
 ContoBancario* ContoBancario::clona() const {
     return new ContoBancario(*this);
+}
+
+string ContoBancario::toString() const {
+    std::stringstream dts;
+    dts << saldo;
+    string s = "ContoBancario: \n " + nome + " " + cognome +
+            "\t SALDO: " + dts.str() + "\n";
+    return s;
 }

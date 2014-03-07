@@ -32,6 +32,7 @@ private:
     };
     CItemPointer first;
     int size;
+    static CItemPointer clone(ConstIterator&, ConstIterator) const;
 public:
     class Iterator {
         friend class Container;
@@ -39,6 +40,7 @@ public:
         CItemPointer punt;
     public:
         Iterator(CItemPointer = 0);
+        K& operator*();
         bool operator==(const Iterator&) const;
         bool operator!=(const Iterator&) const;
         Iterator& operator++();
@@ -52,6 +54,7 @@ public:
     public:
         ConstIterator(CItemPointer = 0);
         ConstIterator(const Iterator&);
+        const K& operator*() const;
         bool operator==(const ConstIterator&) const;
         bool operator!=(const ConstIterator&) const;
         ConstIterator& operator++();
@@ -71,7 +74,7 @@ public:
     ConstIterator begin() const;
     Iterator end();
     ConstIterator end() const;
-    K& operator[](Iterator);
+    K& operator[](Iterator&);
     const K& operator[](ConstIterator) const;
 };
 
@@ -172,6 +175,23 @@ bool Container<K>::CItemPointer::operator!=(const CItemPointer& p) const {
 template <class K>
 Container<K>::Iterator::Iterator(CItemPointer p): punt(p) {}
 
+/*
+// operatore di dereferenziazione che restituisce un K&
+// ATTENZIONE: da usare solo se effettivamente s'intende fare side-effect
+// sugli elementi del Container, in quanto questo metodo esegue delle copie
+// al fine di preservare l'integrità della memoria condivisa (da più Container)
+// che potrebbero essere inutili nel caso si acceda per eseguire solo letture.
+template <class K>
+K& Container<K>::Iterator::operator*() {
+    // l'uso di un Iterator prevede che si facciano side-effect
+    // sugli elementi contenuti. Copio la lista per preservare l'integrità
+    // della memoria condivisa.
+
+
+
+}
+*/
+
 // definizione operatore di uguaglianza
 template <class K>
 bool Container<K>::Iterator::operator==(const Iterator& i) const {
@@ -216,6 +236,13 @@ Container<K>::ConstIterator::ConstIterator(CItemPointer p): punt(p) {}
 // abilita una conversione implicita Iterator => ConstIterator
 template <class K>
 Container<K>::ConstIterator::ConstIterator(const Iterator & it): punt(it.punt) {}
+
+// definizione operatore di dereferenziazione
+template <class K>
+const K& Container<K>::ConstIterator::operator *() const {
+    return punt->info;
+}
+
 // definizione operatore di uguaglianza
 template <class K>
 bool Container<K>::ConstIterator::operator==(const ConstIterator& i) const {
@@ -244,6 +271,7 @@ typename Container<K>::ConstIterator Container<K>::ConstIterator::operator++(int
         punt = punt.itemPointer->next;
     return aux;
 }
+
 
 // ---
 
@@ -365,29 +393,33 @@ typename Container<K>::ConstIterator Container<K>::end() const {
 // al fine di preservare l'integrità della memoria condivisa (da più Container)
 // che potrebbero essere inutili nel caso si acceda per eseguire solo letture.
 template <class K>
-K& Container<K>::operator[](Iterator it) {
+K& Container<K>::operator[](Iterator& it) {
     // l'uso di un Iterator prevede che si facciano side-effect
     // sugli elementi contenuti. Copio la lista per preservare l'integrità
     // della memoria condivisa.
 
     CItemPointer p = first, prec, q;
-    CItemPointer original = first;
+    //CItemPointer original = first;
     bool trovato = false;
     while(p != 0 && !trovato){
         q = new CItem(p->info, p->next);
-        if (prec == 0)
+        if (prec == 0){
             first = q;
-        else
+            prec = q;
+        } else {
             prec->next = q;
-
-        prec = q;
+            prec = prec->next;
+        }
 
         if(p == it.punt)
             trovato = true;
         p = p->next;
     }
-    prec->next = it.punt->next;
+    it.punt = prec;
     return prec->info;
+
+
+
 }
 
 // operatore di subscripting con un parametro formale di tipo ConstIterator
@@ -403,4 +435,21 @@ int Container<K>::getSize() const {
     return size;
 }
 
+/*
+// copia il container delimitato dai due ConstIterator
+// (itBegin compreso, itEnd non compreso)
+// e restituisce il puntatore al primo elemento
+// per valore e il puntatore all'ultimo tramite
+// side-effect su itBegin;
+template <class K>
+static Container<K>::CItemPointer Container<K>::clone(ConstIterator& itBegin, ConstIterator itEnd) const {
+    CItemPointer first = new CItem(*itBegin);
+    CItemPointer p = first;
+    while(++itBegin != itEnd){
+        p->next = new CItem(*it);
+        p = p->next;
+    }
+    return first;
+}
+*/
 #endif // CONTAINER_H

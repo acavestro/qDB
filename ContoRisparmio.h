@@ -12,6 +12,7 @@ public:
     //metodi virtuali
     double preleva(double);
     ContoRisparmio* clona() const;
+    string toString() const;
 };
 
 #endif // CONTORISPARMIO_H

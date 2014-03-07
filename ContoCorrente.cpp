@@ -1,4 +1,6 @@
 #include "ContoCorrente.h"
+#include <sstream>
+using std::string;
 
 double ContoCorrente::commissionePrelievo = 0.5;
 
@@ -16,4 +18,13 @@ double ContoCorrente::preleva(double cifraPrelevata){
 //allocato sullo heap. ATTENZIONE AL GARBAGE!
 ContoCorrente* ContoCorrente::clona() const {
     return new ContoCorrente(*this);
+}
+
+string ContoCorrente::toString() const {
+    std::stringstream dts, cts;
+    dts << getSaldo();
+    cts << commissionePrelievo;
+    return "ContoCorrente (Prelievo: " + cts.str() + "): \n " +
+            getNome() + " " + getCognome() + "\t SALDO: " +
+            dts.str() + "\n";
 }

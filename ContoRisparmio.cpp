@@ -1,5 +1,8 @@
 #include "ContoRisparmio.h"
 #include <string>
+#include <sstream>
+using std::string;
+
 ContoRisparmio::ContoRisparmio(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale):
     ContoBancario(nomeIntestatario, cognomeIntestatario, saldoIniziale) {}
 
@@ -16,4 +19,11 @@ double ContoRisparmio::preleva(double cifraPrelevata){
 
 ContoRisparmio* ContoRisparmio::clona() const {
     return new ContoRisparmio(*this);
+}
+
+string ContoRisparmio::toString() const {
+    std::stringstream dts;
+    dts << getSaldo();
+    return "ContoRisparmio: \n " + getNome() + " " + getCognome()
+            + "\t SALDO: " + dts.str() + "\n";
 }

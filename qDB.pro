@@ -11,19 +11,18 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = qDB
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
         mainwindow.cpp \
     ContoBancario.cpp \
     ContoRisparmio.cpp \
     ContoCorrente.cpp \
-    CBPointer.cpp
+    ElencoConti.cpp
 
 HEADERS  += mainwindow.h \
     Container.h \
     ContoBancario.h \
     ContoRisparmio.h \
     ContoCorrente.h \
-    CBPpointer.h
+    ElencoConti.h
 
 FORMS    += mainwindow.ui
