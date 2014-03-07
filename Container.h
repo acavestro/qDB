@@ -32,7 +32,8 @@ private:
     };
     CItemPointer first;
     int size;
-    static CItemPointer clone(ConstIterator&, ConstIterator) const;
+    CItemPointer searchItem(const K&) const;
+    //static CItemPointer clone(ConstIterator&, ConstIterator);
 public:
     class Iterator {
         friend class Container;
@@ -40,7 +41,7 @@ public:
         CItemPointer punt;
     public:
         Iterator(CItemPointer = 0);
-        K& operator*();
+        //K& operator*();
         bool operator==(const Iterator&) const;
         bool operator!=(const Iterator&) const;
         Iterator& operator++();
@@ -69,6 +70,8 @@ public:
     void addItem(const K&);
     void removeItem(const K&);
     int getSize() const;
+    Iterator indexOf(K&);
+    ConstIterator indexOf(const K&) const;
 
     Iterator begin();
     ConstIterator begin() const;
@@ -433,6 +436,32 @@ const K& Container<K>::operator[](ConstIterator cit) const {
 template <class K>
 int Container<K>::getSize() const {
     return size;
+}
+
+// cerca un elemento K nella lista e restituisce un CItemPointer ad esso
+template <class K>
+typename Container<K>::CItemPointer Container<K>::searchItem(const K& item) const {
+    bool found = false;
+    CItemPointer p = 0;
+    for(ConstIterator it = begin(); !found && it != end(); it++){
+        found = (*it == item);
+        p = it.punt;
+    }
+    return p;
+}
+
+// restituisce un Iterator all'elemento del parametro attuale
+// se non presente l'Iterator è uguale a 0
+template <class K>
+typename Container<K>::Iterator Container<K>::indexOf(K& item) {
+    return searchItem(item);
+}
+
+// restituisce un ConstIterator all'elemento del parametro attuale
+// se non presente l'Iterator è uguale a 0
+template <class K>
+typename Container<K>::ConstIterator Container<K>::indexOf(const K & item) const {
+    return searchItem(item);
 }
 
 /*

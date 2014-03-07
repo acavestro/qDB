@@ -10,7 +10,7 @@ void ElencoConti::aggiungiConto(ContoBancario * cbp){
 
 ostream& operator<<(ostream& os, const ElencoConti& e){
     Container<ElencoConti::ContoPtr>& el = *(e.elenco);
-    for(Container<ElencoConti::ContoPtr>::Iterator it = el.begin(); it != el.end(); it++){
+    for(Container<ElencoConti::ContoPtr>::ConstIterator it = el.begin(); it != el.end(); it++){
         os << (*it)->toString();
     }
     return os;
