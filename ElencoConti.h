@@ -13,6 +13,7 @@ class ElencoConti
 public:
     ElencoConti();
     void aggiungiConto(ContoBancario*);
+    void aggiungiContoSeNonPresente(ContoBancario*);
 private:
     class ContoPtr {
     public:

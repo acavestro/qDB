@@ -7,6 +7,12 @@ void ElencoConti::aggiungiConto(ContoBancario * cbp){
     elenco->addItem(cbp);
 }
 
+void ElencoConti::aggiungiContoSeNonPresente(ContoBancario * cbp){
+    ContoPtr p = cbp;
+    if(!elenco->contains(p))
+        elenco->addItem(p);
+}
+
 
 ostream& operator<<(ostream& os, const ElencoConti& e){
     Container<ElencoConti::ContoPtr>& el = *(e.elenco);

@@ -72,6 +72,7 @@ public:
     int getSize() const;
     Iterator indexOf(K&);
     ConstIterator indexOf(const K&) const;
+    bool contains(const K&) const;
 
     Iterator begin();
     ConstIterator begin() const;
@@ -447,21 +448,30 @@ typename Container<K>::CItemPointer Container<K>::searchItem(const K& item) cons
         found = (*it == item);
         p = it.punt;
     }
-    return p;
+    if(found)
+        return p;
+    else
+        return 0;
 }
 
 // restituisce un Iterator all'elemento del parametro attuale
-// se non presente l'Iterator è uguale a 0
+// se non presente l'Iterator è uguale a Container<K>::end()
 template <class K>
 typename Container<K>::Iterator Container<K>::indexOf(K& item) {
     return searchItem(item);
 }
 
 // restituisce un ConstIterator all'elemento del parametro attuale
-// se non presente l'Iterator è uguale a 0
+// se non presente l'Iterator è uguale a Container<K>::end()
 template <class K>
 typename Container<K>::ConstIterator Container<K>::indexOf(const K & item) const {
     return searchItem(item);
+}
+
+// restituisce true se l'elemento è presente, altrimenti false
+template <class K>
+bool Container<K>::contains(const K& item) const {
+    return indexOf(item) != end();
 }
 
 /*

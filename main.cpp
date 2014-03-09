@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
     elenco.aggiungiConto(new ContoRisparmio("Mario", "Rossi"));
     elenco.aggiungiConto(new ContoCorrente("Paolo", "Bianchi", 1000));
     elenco.aggiungiConto(new ContoCorrente("Mario", "Bianchi", 10000));
+    elenco.aggiungiContoSeNonPresente(new ContoRisparmio("Mario", "Rossi"));
+    elenco.aggiungiContoSeNonPresente(new ContoRisparmio("Francesco", "Papa", 50000));
     cout << elenco;
 
 }
