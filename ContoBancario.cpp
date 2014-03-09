@@ -3,6 +3,11 @@
 #include <sstream>
 using std::string;
 
+/**
+ * @param nomeIntestatario
+ * @param cognomeIntestatario
+ * @param saldoIniziale
+ */
 ContoBancario::ContoBancario(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale):
     saldo(saldoIniziale), nome(nomeIntestatario), cognome(cognomeIntestatario) {}
 
@@ -11,12 +16,18 @@ ContoBancario::ContoBancario(const ContoBancario & cb):
 
 ContoBancario::~ContoBancario() {}
 
+/**
+ * @param cifraPrelevata è il valore da prelevare.
+ */
 double ContoBancario::preleva(double cifraPrelevata){
     //da gestire eccezione: cifraPrelevata > 0
     saldo -= cifraPrelevata;
     return saldo;
 }
 
+/**
+ * @param cifraDepositata è il valore da depositare.
+ */
 double ContoBancario::deposita(double cifraDepositata){
     //da gestire eccezione: cifraDepositata > 0
     saldo += cifraDepositata;
@@ -35,11 +46,17 @@ string ContoBancario::getCognome() const {
     return cognome;
 }
 
+/**
+ * @param newNome è il nuovo nome dell'intestatario
+ */
 void ContoBancario::setNome(string newNome) {
     //da gestire eccezione newNome non vuoto
     nome = newNome;
 }
 
+/**
+ * @param newCognome è il nuovo cognome dell'intestatario
+ */
 void ContoBancario::setCognome(string newCognome) {
     //da gestire eccezione newCognome non vuoto
     cognome = newCognome;

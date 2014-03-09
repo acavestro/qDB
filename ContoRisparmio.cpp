@@ -3,11 +3,20 @@
 #include <sstream>
 using std::string;
 
+/**
+ * @param nomeIntestatario
+ * @param cognomeIntestatario
+ * @param saldoIniziale
+ */
 ContoRisparmio::ContoRisparmio(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale):
     ContoBancario(nomeIntestatario, cognomeIntestatario, saldoIniziale) {}
 
 ContoRisparmio::ContoRisparmio(const ContoRisparmio & cr): ContoBancario(cr) {}
 
+/**
+
+ * @param cifraPrelevata è la cifra da prelevare.
+ */
 double ContoRisparmio::preleva(double cifraPrelevata){
     //attenzione eccezione cifraPrelevata > 0
     if(cifraPrelevata <= getSaldo()){
