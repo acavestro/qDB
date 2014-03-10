@@ -10,7 +10,7 @@ using std::string;
  * commissioni su prelievo e deposito e possibilità
  * di saldo negativo.
  */
-class ContoCorrente: public ContoBancario
+class ContoCorrente: virtual public ContoBancario
 {
 public:
     /**

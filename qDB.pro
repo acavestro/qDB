@@ -14,13 +14,16 @@ SOURCES += main.cpp\
     ContoBancario.cpp \
     ContoRisparmio.cpp \
     ContoCorrente.cpp \
-    ElencoConti.cpp
+    ElencoConti.cpp \
+    dialogaddaccount.cpp
 
 HEADERS  += mainwindow.h \
     Container.h \
     ContoBancario.h \
     ContoRisparmio.h \
     ContoCorrente.h \
-    ElencoConti.h
+    ElencoConti.h \
+    dialogaddaccount.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialogaddaccount.ui

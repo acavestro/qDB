@@ -9,7 +9,7 @@ using std::string;
  * Modella un ContoBancario senza commissioni e senza
  * possibilità di saldo negativo.
  */
-class ContoRisparmio: public ContoBancario
+class ContoRisparmio: virtual public ContoBancario
 {
 public:
     /**

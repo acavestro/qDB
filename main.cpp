@@ -10,13 +10,6 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     /*
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-
-    return a.exec();
-    */
-
     ElencoConti elenco;
     elenco.addAccount(new ContoRisparmio("Mario", "Rossi"));
     elenco.addAccount(new ContoCorrente("Paolo", "Bianchi", 1000));
@@ -32,5 +25,13 @@ int main(int argc, char *argv[])
         cout << "Account non trovato";
     cout << endl;
     cout << elenco;
+    */
+
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+
+    return a.exec();
+
 
 }
