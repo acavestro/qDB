@@ -18,11 +18,19 @@ int main(int argc, char *argv[])
     */
 
     ElencoConti elenco;
-    elenco.aggiungiConto(new ContoRisparmio("Mario", "Rossi"));
-    elenco.aggiungiConto(new ContoCorrente("Paolo", "Bianchi", 1000));
-    elenco.aggiungiConto(new ContoCorrente("Mario", "Bianchi", 10000));
-    elenco.aggiungiContoSeNonPresente(new ContoRisparmio("Mario", "Rossi"));
-    elenco.aggiungiContoSeNonPresente(new ContoRisparmio("Francesco", "Papa", 50000));
+    elenco.addAccount(new ContoRisparmio("Mario", "Rossi"));
+    elenco.addAccount(new ContoCorrente("Paolo", "Bianchi", 1000));
+    elenco.addAccount(new ContoCorrente("Mario", "Bianchi", 10000));
+    elenco.addAccountIfNotPresent(new ContoRisparmio("Mario", "Rossi"));
+    elenco.addAccountIfNotPresent(new ContoRisparmio("Francesco", "Papa", 50000));
+    cout << elenco;
+    cout << endl;
+    ElencoConti::ContoPtr* c = elenco.searchSingleAccount("*", "*", "<=", 1000);
+    if (c != 0)
+        cout << (*c)->getNome() << " " << (*c)->getCognome() << " " << (*c)->getSaldo() << endl;
+    else
+        cout << "Account non trovato";
+    cout << endl;
     cout << elenco;
 
 }

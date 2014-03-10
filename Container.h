@@ -1,6 +1,9 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
-
+/**
+ * @brief Classe Container<K>.
+ * Modella un contenitore di elementi.
+ */
 template <class K>
 class Container {
     friend class Iterator;
@@ -35,50 +38,213 @@ private:
     CItemPointer searchItem(const K&) const;
     //static CItemPointer clone(ConstIterator&, ConstIterator);
 public:
+    /**
+     * @brief Classe Iterator.
+     * Modella un indice per scorrere gli elementi
+     * del Container e permettere side-effect su di
+     * essi.
+     */
     class Iterator {
         friend class Container;
     private:
         CItemPointer punt;
     public:
+        /**
+         * @brief Costruttore di default.
+         */
+        //Permette anche la conversione implicita da
+        //CItemPointer, ma questo agli utenti non interessa
+        //perché questa classe non fa parte dell'interfaccia pubblica
         Iterator(CItemPointer = 0);
-        //K& operator*();
+        //SI DOVREBBE PENSARE A UN MODO PER AGGIUNGERE K& operator*();
+        //Idea: avrebbe senso un Iterator(ConstIterator)? Non credo.
+        /**
+         * @brief Operatore di uguaglianza
+         * @return Un valore booleano pari a true se i
+         * due Iterator puntano allo stesso elemento,
+         * altrimenti false.
+         */
         bool operator==(const Iterator&) const;
+        /**
+         * @brief Operatore di disuguaglianza.
+         * @return Un valore booleano pari a true se i
+         * due Iterator NON puntano allo stesso momento,
+         * altrimenti false.
+         */
         bool operator!=(const Iterator&) const;
+        /**
+         * @brief Operatore d'incremento prefisso.
+         * @return Un oggetto di tipo Iterator rappresentante
+         * lo stato dell'oggetto d'instanza dopo l'operazione
+         * d'incremento.
+         */
         Iterator& operator++();
+        /**
+         * @brief Operatore d'incremento postfisso.
+         * @return Un oggetto di tipo Iterator rappresentante
+         * lo stato dell'oggetto d'instanza prima dell'operazione
+         * d'incremento.
+         */
         Iterator operator++(int);
     };
 
+    /**
+     * @brief Classe ConstIterator.
+     * Modella un indice per scorrere gli elementi
+     * del Container SENZA permettere side-effect ssu
+     * di essi, permettendo quindi solo un accesso
+     * in sola lettura.
+     */
     class ConstIterator {
         friend class Container;
     private:
         CItemPointer punt;
     public:
+        /**
+         * @brief Costruttore di default.
+         */
+        //Permette anche la conversione implicita da
+        //CItemPointer, ma questo agli utenti non interessa
+        //perché questa classe non fa parte dell'interfaccia pubblica
         ConstIterator(CItemPointer = 0);
+        /**
+         * @brief Costruttore che crea un interatore costante
+         * a partire da uno non costante.
+         */
         ConstIterator(const Iterator&);
+        /**
+         * @brief Operatore di dereferenziazione.
+         * @return Un riferimento costante all'elemento
+         * puntato dal ConstIterator.
+         */
         const K& operator*() const;
+        /**
+         * @brief Operatore di uguaglianza
+         * @return Un valore booleano pari a true se i
+         * due ConstIterator puntano allo stesso elemento,
+         * altrimenti false.
+         */
         bool operator==(const ConstIterator&) const;
+        /**
+         * @brief Operatore di disuguaglianza.
+         * @return Un valore booleano pari a true se i
+         * due CnostIterator NON puntano allo stesso momento,
+         * altrimenti false.
+         */
         bool operator!=(const ConstIterator&) const;
+        /**
+         * @brief Operatore d'incremento prefisso.
+         * @return Un oggetto di tipo ConstIterator rappresentante
+         * lo stato dell'oggetto d'instanza dopo l'operazione
+         * d'incremento.
+         */
         ConstIterator& operator++();
+        /**
+         * @brief Operatore d'incremento postfisso.
+         * @return Un oggetto di tipo ConstIterator rappresentante
+         * lo stato dell'oggetto d'instanza prima dell'operazione
+         * d'incremento.
+         */
         ConstIterator operator++(int);
     };
 
+    /**
+     * @brief Costruttore di default. Inizializza il container
+     * con zero elementi.
+     */
     Container();
+    /**
+     * @brief Costruttore di copia.
+     */
     Container(const Container&);
+    // PROPOSTE DI AGGIUNTA
     //Container(const Container&, ConstIterator, ConstIterator);
     //~Container();
+    /**
+     * @brief Test sulla presenza di elementi nel Container.
+     * @return Un valore booleano pari a true se il Container
+     * è vuoto, cioè non contiene elementi, altrimenti false.
+     */
     bool isEmpty() const;
+    /**
+     * @brief Aggiunge un elemento al contenitore.
+     */
     void addItem(const K&);
+    /**
+     * @brief Rimuove un elemento dal contenitore.
+     */
     void removeItem(const K&);
+    /**
+     * @brief Rimuove dal contenitore l'elemento
+     * puntato dall'Iterator passato come parametro.
+     */
+    void removeItem(Iterator);
+    /**
+     * @brief Test sulla dimensione del Container.
+     * @return Un valore intero contenente il numero di
+     * elementi presenti nel contenitore.
+     */
     int getSize() const;
+    /**
+     * @brief Cerca un elemento K nel contenitore
+     * e se presente ne restituisce un iteratore.
+     * In caso di multiple presenze, restituisce un
+     * iteratore alla prima occorrenza.
+     * @return Un oggetto di tipo Iterator contenente
+     * la posizione dell'elemento, nel caso ci sia,
+     * altrimenti un valore pari a end().
+     */
     Iterator indexOf(K&);
+    /**
+     * @brief Cerca un elemento K nel contenitore
+     * e se presente ne restituisce un iteratore costante.
+     * In caso di multiple presenze, restituisce un
+     * iteratore costante alla prima occorrenza.
+     * @return Un oggetto di tipo ConstIterator contenente
+     * la posizione dell'elemento, nel caso ci sia,
+     * altrimenti un valore pari a end().
+     */
     ConstIterator indexOf(const K&) const;
+    /**
+     * @brief Test sulla presenza di un elemento
+     * nel contenitore.
+     * @return Un valore booleano pari a true se è
+     * presente, altrimenti false.
+     */
     bool contains(const K&) const;
-
+    /**
+     * @brief Primo elemento del contenitore.
+     * @return Un oggetto di tipo Iterator che punta
+     * al primo elemento del Container.
+     */
     Iterator begin();
+    /**
+     * @brief Primo elemento del contenitore.
+     * @return Un oggetto di tipo ConstIterator che punta
+     * al primo elemento del Container.
+     */
     ConstIterator begin() const;
+    /**
+     * @brief Elemento successivo all'ultimo.
+     * @return Un oggetto di tipo Iterator che punta
+     * all'elemento successivo all'ultimo.
+     */
     Iterator end();
+    /**
+     * @brief Elemento successivo all'ultimo.
+     * @return Un oggetto di tipo ConstIterator che punta
+     * all'elemento successivo all'ultimo.
+     */
     ConstIterator end() const;
+    /**
+     * @brief Operatore di subscripting
+     * @return Un riferimento ad un elemento del container.
+     */
     K& operator[](Iterator&);
+    /**
+     * @brief Operatore di subscripting
+     * @return Un riferimento COSTANTE ad un elemento del container.
+     */
     const K& operator[](ConstIterator) const;
 };
 
@@ -324,6 +490,9 @@ bool Container<K>::isEmpty() const {
 }
 
 // aggiunge un elemento IN TESTA alla lista del contenitore
+/**
+ * @param item è l'elemento da aggiungere.
+ */
 template <class K>
 void Container<K>::addItem(const K& item){
     first = new CItem(item, first);
@@ -331,8 +500,12 @@ void Container<K>::addItem(const K& item){
 }
 
 // rimuove un elemento const K& item dal contenitore
-// ricercandolo nella lista. Se ci sono più occorrenze
-// di item viene eliminata solo la prima trovata
+// ricercandolo nella lista.
+/**
+ * Se ci sono più occorrenze di item viene
+ * eliminata solo la prima.
+ * @param item è l'elemento da (eventualmente) eliminare.
+ */
 template <class K>
 void Container<K>::removeItem(const K& item){
     if (!isEmpty()){
@@ -362,6 +535,18 @@ void Container<K>::removeItem(const K& item){
             size --;
         }
     }
+}
+
+/**
+ * La rimozione provoca la copia della lista dall'inizio
+ * fino all'elemento precedente a quello che si vuole
+ * cancellare.
+ * @param it è l'Iterator che punta all'elemento
+ * da rimuovere.
+ */
+template <class K>
+void Container<K>::removeItem(Iterator it){
+    removeItem(it.punt->info);
 }
 
 // restituisce un Iterator al primo elemento della lista
@@ -396,6 +581,12 @@ typename Container<K>::ConstIterator Container<K>::end() const {
 // sugli elementi del Container, in quanto questo metodo esegue delle copie
 // al fine di preservare l'integrità della memoria condivisa (da più Container)
 // che potrebbero essere inutili nel caso si acceda per eseguire solo letture.
+/**
+ * ATTENZIONE: da usare solo se effettivamente s'intende fare side-effect
+ * sugli elementi del Container, in quanto questo metodo esegue delle copie
+ * al fine di preservare l'integrità della memoria condivisa (da più Container)
+ * che potrebbero essere inutili nel caso si acceda per eseguire solo letture.
+ */
 template <class K>
 K& Container<K>::operator[](Iterator& it) {
     // l'uso di un Iterator prevede che si facciano side-effect
@@ -456,6 +647,9 @@ typename Container<K>::CItemPointer Container<K>::searchItem(const K& item) cons
 
 // restituisce un Iterator all'elemento del parametro attuale
 // se non presente l'Iterator è uguale a Container<K>::end()
+/**
+ * @param item è l'elemento di cui si vuole ottenere l'indice.
+ */
 template <class K>
 typename Container<K>::Iterator Container<K>::indexOf(K& item) {
     return searchItem(item);
@@ -463,12 +657,18 @@ typename Container<K>::Iterator Container<K>::indexOf(K& item) {
 
 // restituisce un ConstIterator all'elemento del parametro attuale
 // se non presente l'Iterator è uguale a Container<K>::end()
+/**
+ * @param item è l'elemento di cui si vuole ottenere l'indice.
+ */
 template <class K>
 typename Container<K>::ConstIterator Container<K>::indexOf(const K & item) const {
     return searchItem(item);
 }
 
 // restituisce true se l'elemento è presente, altrimenti false
+/**
+ * @param item è l'elemento di cui si vuole verificare la presenza.
+ */
 template <class K>
 bool Container<K>::contains(const K& item) const {
     return indexOf(item) != end();
