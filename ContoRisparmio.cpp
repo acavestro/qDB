@@ -3,6 +3,8 @@
 #include <sstream>
 using std::string;
 
+ContoRisparmio::ContoRisparmio(): ContoBancario() {}
+
 /**
  * @param nomeIntestatario
  * @param cognomeIntestatario

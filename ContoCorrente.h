@@ -14,6 +14,10 @@ class ContoCorrente: virtual public ContoBancario
 {
 public:
     /**
+     * @brief Costruttore di default.
+     */
+    ContoCorrente();
+    /**
      * @brief Costruttore che chiede un nome e un cognome (passati come string)
      * e un saldo iniziale, di default pari a zero.
      */

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Aggiungi nuovo conto</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -103,29 +103,24 @@
     </rect>
    </property>
    <property name="title">
-    <string>Impostazioni</string>
+    <string>Opzioni</string>
    </property>
    <widget class="QCheckBox" name="chkDontAdmitDuplicates">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>211</width>
+      <width>231</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Non aggiungere se duplicato</string>
+     <string>Non aggiungere se già presente</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
-   <zorder>grpBoxAccountType</zorder>
-   <zorder>grpBoxAccountType</zorder>
-   <zorder>grpBoxAccountType</zorder>
-   <zorder>grpBoxAccountData</zorder>
-   <zorder>grpBoxAccountType</zorder>
-   <zorder>grpBoxAccountType</zorder>
-   <zorder>grpBoxAccountType</zorder>
-   <zorder>chkDontAdmitDuplicates</zorder>
   </widget>
   <widget class="QGroupBox" name="grpBoxAccountData">
    <property name="geometry">
@@ -187,6 +182,16 @@
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>radioBancario</tabstop>
+  <tabstop>radioCorrente</tabstop>
+  <tabstop>radioRisparmio</tabstop>
+  <tabstop>txtName</tabstop>
+  <tabstop>txtSurname</tabstop>
+  <tabstop>txtBalance</tabstop>
+  <tabstop>chkDontAdmitDuplicates</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

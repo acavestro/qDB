@@ -5,6 +5,8 @@ using std::string;
 double ContoCorrente::commissionePrelievo = 0.5;
 double ContoCorrente::commissioneDeposito = 0.01;
 
+ContoCorrente::ContoCorrente(): ContoBancario() {}
+
 /**
  * @param nomeIntestatario
  * @param cognomeIntestatario

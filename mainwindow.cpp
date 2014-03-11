@@ -23,5 +23,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_btnAddAccount_clicked()
 {
     DialogAddAccount* daa = new DialogAddAccount;
+    daa->bindElenco(elenco);
     daa->show();
 }
