@@ -1,22 +1,34 @@
 #include "ElencoConti.h"
-using std::cout;
 
 ElencoConti::ElencoConti(): elenco(new Container<ContoPtr>){}
 
-/**
- * @param cbp è il puntatore al ContoBancario che
- * si vuole aggiungere
- */
-void ElencoConti::addAccount(ContoBancario * cbp){
-    elenco->addItem(cbp);
+
+void ElencoConti::addNewContoBancario(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
+    elenco->addItem(new ContoBancario(nomeIntestatario, cognomeIntestatario, saldoIniziale));
 }
 
-/**
- * @param cbp è il puntatore al ContoBancario che
- * si vuole aggiungere
- */
-void ElencoConti::addAccountIfNotPresent(ContoBancario * cbp){
-    ContoPtr p = cbp;
+void ElencoConti::addNewContoBancarioIfNotPresent(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
+    ContoPtr p = new ContoBancario(nomeIntestatario, cognomeIntestatario, saldoIniziale);
+    if(!elenco->contains(p))
+        elenco->addItem(p);
+}
+
+void ElencoConti::addNewContoCorrente(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
+    elenco->addItem(new ContoCorrente(nomeIntestatario, cognomeIntestatario, saldoIniziale));
+}
+
+void ElencoConti::addNewContoCorrenteIfNotPresent(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
+    ContoPtr p = new ContoCorrente(nomeIntestatario, cognomeIntestatario, saldoIniziale);
+    if(!elenco->contains(p))
+        elenco->addItem(p);
+}
+
+void ElencoConti::addNewContoRisparmio(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
+    elenco->addItem(new ContoRisparmio(nomeIntestatario, cognomeIntestatario, saldoIniziale));
+}
+
+void ElencoConti::addNewContoRisparmioIfNotPresent(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
+    ContoPtr p = new ContoRisparmio(nomeIntestatario, cognomeIntestatario, saldoIniziale);
     if(!elenco->contains(p))
         elenco->addItem(p);
 }
@@ -49,9 +61,9 @@ ElencoConti::ContoPtr* ElencoConti::searchSingleAccount(string namePattern,
     Container<ContoPtr>::Iterator itToReturn;
     for(Container<ContoPtr>::Iterator it = elenco->begin();
         !found && it!=elenco->end(); it++) {
-        if(accountHasThisName((*elenco)[it], namePattern) &&
-                accountHasThisSurname((*elenco)[it], surnamePattern) &&
-                accountHasThisBalance((*elenco)[it], balanceValue, balancePattern)){
+        if((*elenco)[it].hasThisName(namePattern) &&
+                (*elenco)[it].hasThisSurname(surnamePattern) &&
+                (*elenco)[it].hasThisBalance(balanceValue, balancePattern)){
             found = true;
             itToReturn = it;
         }
@@ -60,6 +72,21 @@ ElencoConti::ContoPtr* ElencoConti::searchSingleAccount(string namePattern,
         return &((*elenco)[itToReturn]);
     else
         return 0;
+}
+
+Container<Container<ElencoConti::ContoPtr>::ConstIterator> ElencoConti::search(string namePattern,
+                                                                  string surnamePattern,
+                                                                  string balancePattern,
+                                                                  double balanceValue) const {
+    Container<Container<ContoPtr>::ConstIterator> c;
+    for(Container<ContoPtr>::ConstIterator it = elenco->begin(); it != elenco->end(); it++){
+        if(it->hasThisName(namePattern) &&
+                it->hasThisSurname(surnamePattern) &&
+                it->hasThisBalance(balanceValue, balancePattern)){
+            c.addItem(it);
+        }
+    }
+    return c;
 }
 
 /**
@@ -74,22 +101,22 @@ ostream& operator<<(ostream& os, const ElencoConti& e){
     return os;
 }
 
-bool ElencoConti::accountHasThisName(ContoPtr acc, string pattern) const {
+bool ElencoConti::ContoPtr::hasThisName(string pattern) const {
     if (pattern == "*" || pattern == "")
         return true;
-    return acc->getNome() == pattern;
+    return punt->getNome() == pattern;
 }
 
-bool ElencoConti::accountHasThisSurname(ContoPtr acc, string pattern) const {
+bool ElencoConti::ContoPtr::hasThisSurname(string pattern) const {
     if (pattern == "*" || pattern == "")
         return true;
-    return acc->getCognome() == pattern;
+    return punt->getCognome() == pattern;
 }
 
-bool ElencoConti::accountHasThisBalance(ContoPtr acc, double value, string pattern) const {
+bool ElencoConti::ContoPtr::hasThisBalance(double value, string pattern) const {
     if(pattern == "*" || pattern == "")
         return true;
-    double b = acc->getSaldo();
+    double b = punt->getSaldo();
     if(pattern == "=")
         return b == value;
     else if(pattern == ">")

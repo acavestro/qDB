@@ -47,3 +47,11 @@ string ContoCorrente::toString() const {
             getNome() + " " + getCognome() + "\t SALDO: " +
             dts.str() + "\n";
 }
+
+bool ContoCorrente::operator ==(const ContoBancario& cb) const {
+    const ContoCorrente* cc = dynamic_cast<const ContoCorrente*>(&cb);
+    if(cc && ContoBancario::operator ==(cb))
+        return true;
+    else
+        return false;
+}

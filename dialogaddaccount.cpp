@@ -42,17 +42,17 @@ bool DialogAddAccount::addConto(){
         int typeAccount = ui->btnGrpAccountType->checkedId();
         bool notAdmitDuplicates = ui->chkDontAdmitDuplicates->isChecked();
         if(typeAccount == CBANCARIO_ID && notAdmitDuplicates)
-            el->addAccountIfNotPresent(new ContoBancario(name.toStdString(), surname.toStdString(), balance));
+            el->addNewContoBancarioIfNotPresent(name.toStdString(), surname.toStdString(), balance);
         else if(typeAccount == CBANCARIO_ID && !notAdmitDuplicates)
-            el->addAccount(new ContoBancario(name.toStdString(), surname.toStdString(), balance));
+            el->addNewContoBancario(name.toStdString(), surname.toStdString(), balance);
         else if(typeAccount == CCORRENTE_ID && notAdmitDuplicates)
-            el->addAccountIfNotPresent(new ContoCorrente(name.toStdString(), surname.toStdString(), balance));
+            el->addNewContoCorrenteIfNotPresent(name.toStdString(), surname.toStdString(), balance);
         else if(typeAccount == CCORRENTE_ID && !notAdmitDuplicates)
-            el->addAccount(new ContoCorrente(name.toStdString(), surname.toStdString(), balance));
+            el->addNewContoCorrente(name.toStdString(), surname.toStdString(), balance);
         else if(typeAccount == CRISPARMIO_ID && notAdmitDuplicates && balance >=0)
-            el->addAccountIfNotPresent(new ContoRisparmio(name.toStdString(), surname.toStdString(), balance));
+            el->addNewContoRisparmioIfNotPresent(name.toStdString(), surname.toStdString(), balance);
         else if(typeAccount == CRISPARMIO_ID && !notAdmitDuplicates && balance >=0)
-            el->addAccount(new ContoRisparmio(name.toStdString(), surname.toStdString(), balance));
+            el->addNewContoRisparmio(name.toStdString(), surname.toStdString(), balance);
         else {
             QMessageBox err;
             err.setText("Si è verificato qualche problema con l'inserimento. Il conto non è stato creato");

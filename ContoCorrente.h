@@ -50,6 +50,7 @@ public:
      * del ContoCorrente.
      */
     string toString() const;
+    bool operator==(const ContoBancario&) const;
 private:
     static double commissionePrelievo;
     static double commissioneDeposito;

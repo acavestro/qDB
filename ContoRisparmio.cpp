@@ -38,3 +38,11 @@ string ContoRisparmio::toString() const {
     return "ContoRisparmio: \n " + getNome() + " " + getCognome()
             + "\t SALDO: " + dts.str() + "\n";
 }
+
+bool ContoRisparmio::operator ==(const ContoBancario& cb) const {
+    const ContoRisparmio* cr = dynamic_cast<const ContoRisparmio*>(&cb);
+    if(cr && ContoBancario::operator ==(cb))
+        return true;
+    else
+        return false;
+}

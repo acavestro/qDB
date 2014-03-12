@@ -47,6 +47,7 @@ public:
      * del ContoRisparmio.
      */
     string toString() const;
+    bool operator==(const ContoBancario&) const;
 };
 
 #endif // CONTORISPARMIO_H

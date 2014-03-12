@@ -39,6 +39,9 @@ public:
         const ContoBancario& operator*() const;
         ContoBancario* operator->();
         const ContoBancario* operator->() const;
+        bool hasThisName(string = "*") const;
+        bool hasThisSurname(string ="*") const;
+        bool hasThisBalance(double, string = "*") const;
     };
     /**
      * @brief Costruttore di default. Crea un nuovo elenco,
@@ -48,13 +51,33 @@ public:
     /**
      * @brief Aggiunge un nuovo ContoBancario all'elenco
      */
-    void addAccount(ContoBancario*);
+    void addNewContoBancario(string, string, double =0);
     /**
      * @brief Aggiunge un nuovo ContoBancario all'elenco
      * se e solo se quest'ultimo non si trova già al
      * suo interno.
      */
-    void addAccountIfNotPresent(ContoBancario*);
+    void addNewContoBancarioIfNotPresent(string, string, double =0);
+    /**
+     * @brief Aggiunge un nuovo ContoCorrente all'elenco
+     */
+    void addNewContoCorrente(string, string, double =0);
+    /**
+     * @brief Aggiunge un nuovo ContoCorrente all'elenco
+     * se e solo se quest'ultimo non si trova già al
+     * suo interno.
+     */
+    void addNewContoCorrenteIfNotPresent(string, string, double =0);
+    /**
+     * @brief Aggiunge un nuovo ContoRisparmio all'elenco
+     */
+    void addNewContoRisparmio(string, string, double =0);
+    /**
+     * @brief Aggiunge un nuovo ContoRisparmio all'elenco
+     * se e solo se quest'ultimo non si trova già al
+     * suo interno.
+     */
+    void addNewContoRisparmioIfNotPresent(string, string, double =0);
     /**
      * @brief Cancella un ContoBancario
      */
@@ -72,12 +95,10 @@ public:
      * parametri. Se non ci sono occorrenze ritorna 0;
      */
     ContoPtr* searchSingleAccount(string ="*", string ="*", string = "*", double =0.0);
+    Container<Container<ContoPtr>::ConstIterator> search(string ="*", string="*", string="*", double=0.0) const;
 
 private:
     Container<ContoPtr>* elenco;
-    bool accountHasThisName(ContoPtr, string = "*") const;
-    bool accountHasThisSurname(ContoPtr, string ="*") const;
-    bool accountHasThisBalance(ContoPtr, double, string = "*") const;
 };
 
 #endif // ELENCOCONTI_H

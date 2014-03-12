@@ -19,6 +19,8 @@ public:
 private slots:
     void on_btnAddAccount_clicked();
 
+    void on_btnSearchAccount_clicked();
+
 private:
     Ui::MainWindow *ui;
     ElencoConti *elenco;

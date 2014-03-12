@@ -29,13 +29,12 @@
        <property name="title">
         <string>GroupBox</string>
        </property>
-       <zorder>gbAddAccounts</zorder>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QGroupBox" name="gbAddAccounts">
+      <widget class="QGroupBox" name="gbAccountOperations">
        <property name="title">
-        <string>Aggiungi Conto</string>
+        <string>Operazioni sui conti</string>
        </property>
        <widget class="QWidget" name="verticalLayoutWidget">
         <property name="geometry">
@@ -43,7 +42,7 @@
           <x>9</x>
           <y>29</y>
           <width>211</width>
-          <height>101</height>
+          <height>241</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -51,6 +50,13 @@
           <widget class="QPushButton" name="btnAddAccount">
            <property name="text">
             <string>Aggiungi Conto</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnSearchAccount">
+           <property name="text">
+            <string>Ricerca Conto</string>
            </property>
           </widget>
          </item>

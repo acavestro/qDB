@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "dialogaddaccount.h"
+#include "dialogsearchaccount.h"
 #include "QInputDialog"
 #include "QString"
 #include "iostream"
@@ -25,4 +26,11 @@ void MainWindow::on_btnAddAccount_clicked()
     DialogAddAccount* daa = new DialogAddAccount;
     daa->bindElenco(elenco);
     daa->show();
+}
+
+void MainWindow::on_btnSearchAccount_clicked()
+{
+    DialogSearchAccount *dsa = new DialogSearchAccount;
+    dsa->bindElenco(elenco);
+    dsa->show();
 }
