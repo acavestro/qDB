@@ -29,7 +29,6 @@
        <property name="title">
         <string>GroupBox</string>
        </property>
-       <zorder>gbAccountOperations</zorder>
       </widget>
      </item>
      <item row="0" column="1">
@@ -43,7 +42,7 @@
           <x>9</x>
           <y>29</y>
           <width>221</width>
-          <height>131</height>
+          <height>151</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -57,7 +56,7 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Facendo click su &quot;Lista Conti&quot; sarà possibile visualizzare tutti i conti, modificarli e rimuoverli.</string>
+            <string>Facendo click su &quot;Lista Conti&quot; sarà possibile visualizzare tutti i conti, modificarli, rimuoverli, prelevare e depositare.</string>
            </property>
            <property name="scaledContents">
             <bool>false</bool>
@@ -76,6 +75,8 @@
          </item>
         </layout>
        </widget>
+       <zorder>verticalLayoutWidget</zorder>
+       <zorder>btnSearchAccount</zorder>
       </widget>
      </item>
     </layout>

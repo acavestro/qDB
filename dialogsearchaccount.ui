@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>517</width>
-    <height>352</height>
+    <height>370</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -117,8 +117,8 @@
   <widget class="QPushButton" name="btnSearch">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>160</y>
+     <x>150</x>
+     <y>165</y>
      <width>114</width>
      <height>32</height>
     </rect>
@@ -131,7 +131,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>190</y>
+     <y>240</y>
      <width>501</width>
      <height>121</height>
     </rect>
@@ -169,7 +169,7 @@
     </property>
    </column>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="lblInfo1">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -185,14 +185,30 @@
   <widget class="QPushButton" name="btnResetFields">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>160</y>
+     <x>260</x>
+     <y>165</y>
      <width>114</width>
      <height>32</height>
     </rect>
    </property>
    <property name="text">
     <string>Resetta campi</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblInfo2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>200</y>
+     <width>491</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Facendo doppio click su un conto sarà possibile modificarlo, cancellarlo, prelevare o depositare.</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
