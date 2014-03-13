@@ -46,3 +46,7 @@ bool ContoRisparmio::operator ==(const ContoBancario& cb) const {
     else
         return false;
 }
+
+string ContoRisparmio::getTipoConto() const {
+    return "Conto Risparmio";
+}

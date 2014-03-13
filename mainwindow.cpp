@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     elenco(new ElencoConti)
 {
     ui->setupUi(this);
+    ui->statusBar->showMessage("qDB v1.0 - Programmazione a Oggetti 2013/2014 @ UniPD - Antonio Cavestro");
 }
 
 MainWindow::~MainWindow()

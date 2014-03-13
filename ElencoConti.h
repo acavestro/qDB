@@ -94,8 +94,8 @@ public:
      *  nell'elenco che corrisponde ai pattern passati come
      * parametri. Se non ci sono occorrenze ritorna 0;
      */
-    ContoPtr* searchSingleAccount(string ="*", string ="*", string = "*", double =0.0);
-    Container<Container<ContoPtr>::ConstIterator> search(string ="*", string="*", string="*", double=0.0) const;
+    //ContoPtr* searchSingleAccount(string ="*", string ="*", string = "*", double =0.0);
+    Container<ElencoConti::ContoPtr&> search(string ="*", string="*", string="*", double=0.0) const;
 
 private:
     Container<ContoPtr>* elenco;

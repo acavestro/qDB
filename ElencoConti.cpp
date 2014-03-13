@@ -47,12 +47,14 @@ void ElencoConti::deleteAccount(Container<ContoPtr>::Iterator it){
     elenco->removeItem(it);
 }
 
+
 /**
  * @param namePattern è il nome da cercare (o *)
  * @param surnamePattern è il cognome da cercare (o *)
  * @param balancePattern è il pattern del saldo (=, >, >=, <, <=)
  * @param balanceValue è il valore su cui applicare il pattern del saldo
  */
+/*
 ElencoConti::ContoPtr* ElencoConti::searchSingleAccount(string namePattern,
                                            string surnamePattern,
                                            string balancePattern,
@@ -73,17 +75,18 @@ ElencoConti::ContoPtr* ElencoConti::searchSingleAccount(string namePattern,
     else
         return 0;
 }
+*/
 
-Container<Container<ElencoConti::ContoPtr>::ConstIterator> ElencoConti::search(string namePattern,
+Container<ElencoConti::ContoPtr&> ElencoConti::search(string namePattern,
                                                                   string surnamePattern,
                                                                   string balancePattern,
                                                                   double balanceValue) const {
-    Container<Container<ContoPtr>::ConstIterator> c;
-    for(Container<ContoPtr>::ConstIterator it = elenco->begin(); it != elenco->end(); it++){
-        if(it->hasThisName(namePattern) &&
-                it->hasThisSurname(surnamePattern) &&
-                it->hasThisBalance(balanceValue, balancePattern)){
-            c.addItem(it);
+    Container<ElencoConti::ContoPtr&> c;
+    for(Container<ContoPtr>::Iterator it = elenco->begin(); it != elenco->end(); it++){
+        if((*elenco)[it].hasThisName(namePattern) &&
+                (*elenco)[it].hasThisSurname(surnamePattern) &&
+                (*elenco)[it].hasThisBalance(balanceValue, balancePattern)){
+            c.addItem((*elenco)[it]);
         }
     }
     return c;

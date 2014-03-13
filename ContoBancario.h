@@ -84,6 +84,7 @@ public:
      * quelli dell'oggetto d'istanza, altrimenti false.
      */
     virtual bool operator==(const ContoBancario&) const;
+    virtual string getTipoConto() const;
 private:
 
     double saldo;

@@ -123,7 +123,7 @@ public:
          * @return Un puntatore all'elemento
          * puntato dal ConstIterator, marcato costate.
          */
-        const K* operator->() const;
+        //const K* operator->() const;
         /**
          * @brief Operatore di uguaglianza
          * @return Un valore booleano pari a true se i
@@ -419,11 +419,13 @@ const K& Container<K>::ConstIterator::operator *() const {
     return punt->info;
 }
 
+/*
 // definizione operatore di accesso a membro
 template <class K>
 const K* Container<K>::ConstIterator::operator ->() const {
     return &(punt->info);
 }
+*/
 
 // definizione operatore di uguaglianza
 template <class K>

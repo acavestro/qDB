@@ -81,3 +81,7 @@ string ContoBancario::toString() const {
 bool ContoBancario::operator ==(const ContoBancario& cb) const {
     return nome == cb.nome && cognome == cb.cognome && saldo == cb.saldo;
 }
+
+string ContoBancario::getTipoConto() const {
+    return "Conto Bancario";
+}

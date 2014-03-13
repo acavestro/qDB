@@ -51,6 +51,7 @@ public:
      */
     string toString() const;
     bool operator==(const ContoBancario&) const;
+    string getTipoConto() const;
 private:
     static double commissionePrelievo;
     static double commissioneDeposito;

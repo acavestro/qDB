@@ -48,6 +48,7 @@ public:
      */
     string toString() const;
     bool operator==(const ContoBancario&) const;
+    string getTipoConto() const;
 };
 
 #endif // CONTORISPARMIO_H
