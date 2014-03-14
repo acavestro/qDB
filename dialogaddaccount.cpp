@@ -22,6 +22,7 @@ void DialogAddAccount::bindElenco(ElencoConti* e){
     el = e;
 }
 
+
 DialogAddAccount::~DialogAddAccount()
 {
     delete ui;
@@ -57,12 +58,13 @@ bool DialogAddAccount::addConto(){
             QMessageBox err;
             err.setText("Si è verificato qualche problema con l'inserimento. Il conto non è stato creato");
             err.exec();
-            return true;
+            return false;
         }
         QMessageBox info;
         info.setText("Conto creato e salvato con successo!");
         info.exec();
-        return false;
+        emit newAccountAdded();
+        return true;
     }
 }
 

@@ -96,6 +96,10 @@ public:
      */
     //ContoPtr* searchSingleAccount(string ="*", string ="*", string = "*", double =0.0);
     Container<ElencoConti::ContoPtr&> search(string ="*", string="*", string="*", double=0.0) const;
+    static double getCommissionePrelievoCC();
+    static double getCommissioneDepositoCC();
+    int getNumConti() const;
+    double getSaldoTotale() const;
 
 private:
     Container<ContoPtr>* elenco;

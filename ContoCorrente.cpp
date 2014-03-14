@@ -17,6 +17,14 @@ ContoCorrente::ContoCorrente(string nomeIntestatario, string cognomeIntestatario
 
 ContoCorrente::ContoCorrente(const ContoCorrente & cc): ContoBancario(cc) {}
 
+double ContoCorrente::getCommissioneDeposito() {
+    return commissioneDeposito;
+}
+
+double ContoCorrente::getCommissionePrelievo() {
+    return commissionePrelievo;
+}
+
 /**
  * @param cifraPrelevata è la cifra da prelevare
  */

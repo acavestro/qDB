@@ -15,11 +15,12 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void loadElencoContiInfo();
 
 private slots:
     void on_btnAddAccount_clicked();
-
     void on_btnSearchAccount_clicked();
+    void onReloadInfoConti();
 
 private:
     Ui::MainWindow *ui;

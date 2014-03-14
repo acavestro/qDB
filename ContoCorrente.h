@@ -26,6 +26,8 @@ public:
      * @brief Costruttore di copia
      */
     ContoCorrente(const ContoCorrente&);
+    static double getCommissionePrelievo();
+    static double getCommissioneDeposito();
     //metodi virtuali
     /**
      * @brief Preleva dal ContoCorrente il valore double passato come

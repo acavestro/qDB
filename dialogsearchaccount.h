@@ -18,6 +18,7 @@ public:
     void bindElenco(ElencoConti*);
     void openConto(int);
 
+
 private slots:
     void on_btnSearch_clicked();
     void on_tblSearchResult_cellDoubleClicked(int row, int column);

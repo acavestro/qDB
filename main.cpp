@@ -1,11 +1,8 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include <ElencoConti.h>
-#include <iostream>
-#include <string>
-#include <ContoRisparmio.h>
-#include <ContoCorrente.h>
-using namespace std;
+#include "QString"
+#include "QTextCodec"
+
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +25,7 @@ int main(int argc, char *argv[])
     */
 
     QApplication a(argc, argv);
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
     MainWindow w;
     w.show();
 

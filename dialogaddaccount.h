@@ -20,6 +20,9 @@ public:
     };
     void bindElenco(ElencoConti*);
 
+signals:
+    void newAccountAdded();
+
 private slots:
     void on_buttonBox_accepted();
 

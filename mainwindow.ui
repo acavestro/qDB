@@ -6,80 +6,150 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>503</width>
-    <height>334</height>
+    <width>536</width>
+    <height>348</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Gestione Conti Bancari</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="gridLayoutWidget">
+   <widget class="QGroupBox" name="grpBoxInfo">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>-1</y>
-      <width>481</width>
-      <height>281</height>
+      <x>10</x>
+      <y>190</y>
+      <width>331</width>
+      <height>121</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="2">
-      <widget class="QGroupBox" name="groupBox_2">
-       <property name="title">
-        <string>GroupBox</string>
+    <property name="title">
+     <string>Informazioni</string>
+    </property>
+    <zorder>formLayoutWidget</zorder>
+   </widget>
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>210</y>
+      <width>311</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::FieldsStayAtSizeHint</enum>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblInfoCC1">
+       <property name="text">
+        <string>Commissione prelevi CC:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QGroupBox" name="gbAccountOperations">
-       <property name="title">
-        <string>Operazioni sui conti</string>
+      <widget class="QLabel" name="lblCommPrelCC">
+       <property name="text">
+        <string>TextLabel</string>
        </property>
-       <widget class="QWidget" name="verticalLayoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>9</x>
-          <y>29</y>
-          <width>221</width>
-          <height>151</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QPushButton" name="btnAddAccount">
-           <property name="text">
-            <string>Aggiungi Conto</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Facendo click su &quot;Lista Conti&quot; sarà possibile visualizzare tutti i conti, modificarli, rimuoverli, prelevare e depositare.</string>
-           </property>
-           <property name="scaledContents">
-            <bool>false</bool>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnSearchAccount">
-           <property name="text">
-            <string>Lista Conti</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <zorder>verticalLayoutWidget</zorder>
-       <zorder>btnSearchAccount</zorder>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblInfoCC2">
+       <property name="text">
+        <string>Commissione depositi CC:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="lblCommDepCC">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblInfoConti1">
+       <property name="text">
+        <string>Numero conti bancari aperti:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="lblTotConti">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lblInfoConti2">
+       <property name="text">
+        <string>Saldo totale in cassa:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="lblSaldoTot">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QGroupBox" name="gbAccountOperations">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>-1</y>
+      <width>511</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Operazioni sui conti</string>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>29</y>
+       <width>221</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="btnAddAccount">
+        <property name="text">
+         <string>Aggiungi Conto</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Facendo click su &quot;Lista Conti&quot; sarà possibile visualizzare tutti i conti, modificarli, rimuoverli, prelevare e depositare.</string>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnSearchAccount">
+        <property name="text">
+         <string>Lista Conti</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>

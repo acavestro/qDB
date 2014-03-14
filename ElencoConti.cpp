@@ -92,6 +92,26 @@ Container<ElencoConti::ContoPtr&> ElencoConti::search(string namePattern,
     return c;
 }
 
+double ElencoConti::getCommissioneDepositoCC() {
+    return ContoCorrente::getCommissioneDeposito();
+}
+
+double ElencoConti::getCommissionePrelievoCC() {
+    return ContoCorrente::getCommissionePrelievo();
+}
+
+int ElencoConti::getNumConti() const {
+    return elenco->getSize();
+}
+
+double ElencoConti::getSaldoTotale() const {
+    double saldoTot = 0;
+    for(Container<ContoPtr>::ConstIterator it = elenco->begin(); it != elenco->end(); it++){
+        saldoTot += (*it)->getSaldo();
+    }
+    return saldoTot;
+}
+
 /**
  * @param os è lo stream su cui stampare.
  * @param e è l'elenco che si vuole stampare.

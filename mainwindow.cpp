@@ -5,7 +5,6 @@
 #include "QInputDialog"
 #include "QString"
 #include "iostream"
-#include <ContoBancario.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->statusBar->showMessage("qDB v1.0 - Programmazione a Oggetti 2013/2014 @ UniPD - Antonio Cavestro");
+    ui->lblCommDepCC->setText(QString::number(ElencoConti::getCommissioneDepositoCC()) + " €");
+    ui->lblCommPrelCC->setText(QString::number(ElencoConti::getCommissionePrelievoCC()) + " €");
+    loadElencoContiInfo();
 }
 
 MainWindow::~MainWindow()
@@ -21,11 +23,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::loadElencoContiInfo(){
+    ui->lblTotConti->setText(QString::number(elenco->getNumConti()));
+    ui->lblSaldoTot->setText(QString::number(elenco->getSaldoTotale()) + " €");
+}
+
 
 void MainWindow::on_btnAddAccount_clicked()
 {
     DialogAddAccount* daa = new DialogAddAccount;
     daa->bindElenco(elenco);
+    connect(daa, SIGNAL(newAccountAdded()), this, SLOT(onReloadInfoConti()));
     daa->show();
 }
 
@@ -34,4 +42,8 @@ void MainWindow::on_btnSearchAccount_clicked()
     DialogSearchAccount *dsa = new DialogSearchAccount;
     dsa->bindElenco(elenco);
     dsa->show();
+}
+
+void MainWindow::onReloadInfoConti(){
+    loadElencoContiInfo();
 }
