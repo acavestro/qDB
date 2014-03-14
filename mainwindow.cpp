@@ -41,6 +41,7 @@ void MainWindow::on_btnSearchAccount_clicked()
 {
     DialogSearchAccount *dsa = new DialogSearchAccount;
     dsa->bindElenco(elenco);
+    connect(dsa, SIGNAL(infoElencoChanged()), this, SLOT(onReloadInfoConti()));
     dsa->show();
 }
 

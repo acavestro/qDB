@@ -16,7 +16,8 @@ SOURCES += main.cpp\
     ContoCorrente.cpp \
     ElencoConti.cpp \
     dialogaddaccount.cpp \
-    dialogsearchaccount.cpp
+    dialogsearchaccount.cpp \
+    dialogeditaccount.cpp
 
 HEADERS  += mainwindow.h \
     Container.h \
@@ -25,8 +26,10 @@ HEADERS  += mainwindow.h \
     ContoCorrente.h \
     ElencoConti.h \
     dialogaddaccount.h \
-    dialogsearchaccount.h
+    dialogsearchaccount.h \
+    dialogeditaccount.h
 
 FORMS    += mainwindow.ui \
     dialogaddaccount.ui \
-    dialogsearchaccount.ui
+    dialogsearchaccount.ui \
+    dialogeditaccount.ui

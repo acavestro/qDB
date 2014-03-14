@@ -77,19 +77,26 @@ ElencoConti::ContoPtr* ElencoConti::searchSingleAccount(string namePattern,
 }
 */
 
-Container<ElencoConti::ContoPtr&> ElencoConti::search(string namePattern,
+ElencoConti::ContoPtr** ElencoConti::search(int& numResult, string namePattern,
                                                                   string surnamePattern,
                                                                   string balancePattern,
                                                                   double balanceValue) const {
-    Container<ElencoConti::ContoPtr&> c;
+    Container<ElencoConti::ContoPtr*> c;
     for(Container<ContoPtr>::Iterator it = elenco->begin(); it != elenco->end(); it++){
         if((*elenco)[it].hasThisName(namePattern) &&
                 (*elenco)[it].hasThisSurname(surnamePattern) &&
                 (*elenco)[it].hasThisBalance(balanceValue, balancePattern)){
-            c.addItem((*elenco)[it]);
+            c.addItem(&((*elenco)[it]));
         }
     }
-    return c;
+    numResult = c.getSize();
+    ElencoConti::ContoPtr** vc = new ElencoConti::ContoPtr*[numResult];
+    Container<ContoPtr*>::ConstIterator cit = c.begin();
+    for(int i = 0; i < numResult; i++){
+        vc[i] = *cit;
+        cit++;
+    }
+    return vc;
 }
 
 double ElencoConti::getCommissioneDepositoCC() {

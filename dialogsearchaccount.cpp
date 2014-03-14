@@ -4,7 +4,9 @@
 #include "QMessageBox"
 #include "QSignalMapper"
 #include "QDebug"
+#include "dialogeditaccount.h"
 #include <Container.h>
+
 
 DialogSearchAccount::DialogSearchAccount(QWidget *parent) :
     QDialog(parent),
@@ -16,7 +18,7 @@ DialogSearchAccount::DialogSearchAccount(QWidget *parent) :
 
 DialogSearchAccount::~DialogSearchAccount()
 {
-    delete searchResult;
+    delete[] searchResult;
     delete ui;
 }
 
@@ -37,35 +39,32 @@ bool DialogSearchAccount::populateTable() {
         err.exec();
         return false;
     } else {
-        delete searchResult;
-        searchResult = new Container<ElencoConti::ContoPtr&>(el->search(name.toStdString(),
-                                                                        surname.toStdString(),
-                                                                        balancePattern.toStdString(),
-                                                                        balance));
-        if (searchResult->getSize() > 0){
+        delete[] searchResult;
+        searchResult = el->search(numResult, name.toStdString(), surname.toStdString(), balancePattern.toStdString(), balance);
+        if (numResult > 0){
             int row = 0, col;
 
-            for(Container<ElencoConti::ContoPtr&>::Iterator it = searchResult->begin(); it != searchResult->end(); it++){
-                //ElencoConti::ContoPtr& cp = c[it];
+            for(int i = 0; i < numResult; i++){
+                ElencoConti::ContoPtr* cp = searchResult[i];
                 ui->tblSearchResult->setRowCount(row+1);
                 col = 0;
 
-                QTableWidgetItem *newItem = new QTableWidgetItem(QString::fromStdString((*searchResult)[it]->getTipoConto()));
+                QTableWidgetItem *newItem = new QTableWidgetItem(QString::fromStdString((*cp)->getTipoConto()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 ui->tblSearchResult->setItem(row, col, newItem);
                 col++;
 
-                newItem = new QTableWidgetItem(QString::fromStdString((*searchResult)[it]->getNome()));
+                newItem = new QTableWidgetItem(QString::fromStdString((*cp)->getNome()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 ui->tblSearchResult->setItem(row, col, newItem);
                 col++;
 
-                newItem = new QTableWidgetItem(QString::fromStdString((*searchResult)[it]->getCognome()));
+                newItem = new QTableWidgetItem(QString::fromStdString((*cp)->getCognome()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 ui->tblSearchResult->setItem(row, col, newItem);
                 col++;
 
-                newItem = new QTableWidgetItem(QString::number((*searchResult)[it]->getSaldo()));
+                newItem = new QTableWidgetItem(QString::number((*cp)->getSaldo()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 ui->tblSearchResult->setItem(row, col, newItem);
                 col++;
@@ -89,15 +88,23 @@ bool DialogSearchAccount::populateTable() {
 }
 
 void DialogSearchAccount::openConto(int row){
+    /*
     int rCont = 0;
-    Container<ElencoConti::ContoPtr&>::Iterator it;
+    Container<ElencoConti::ContoPtr*>::Iterator it;
     for(it = searchResult->begin(); rCont < row && it != searchResult->end(); it++){
         rCont++;
     }
+
     QMessageBox dlg;
     //dlg.setText(QString::fromStdString(cp->getNome()));
     dlg.setText(QString::fromStdString((*searchResult)[it]->getNome()));
-    dlg.exec();
+    dlg.exec();*/
+
+    DialogEditAccount* dea = new DialogEditAccount;
+    dea->bindAccount(searchResult[row]);
+    connect(dea, SIGNAL(accountChanged()), this, SLOT(onAccountChanged()));
+    connect(dea, SIGNAL(operationMaked()), this, SLOT(onAccountChanged()));
+    dea->show();
 
 }
 
@@ -126,4 +133,9 @@ void DialogSearchAccount::on_btnResetFields_clicked()
     if(ui->tblSearchResult->rowCount())
         ui->tblSearchResult->setRowCount(0);
 
+}
+
+void DialogSearchAccount::onAccountChanged(){
+    populateTable();
+    emit infoElencoChanged();
 }

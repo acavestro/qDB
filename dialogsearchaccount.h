@@ -18,17 +18,20 @@ public:
     void bindElenco(ElencoConti*);
     void openConto(int);
 
+signals:
+    void infoElencoChanged();
 
 private slots:
     void on_btnSearch_clicked();
     void on_tblSearchResult_cellDoubleClicked(int row, int column);
-
     void on_btnResetFields_clicked();
+    void onAccountChanged();
 
 private:
     Ui::DialogSearchAccount *ui;
     ElencoConti* el;
-    Container<ElencoConti::ContoPtr&>* searchResult;
+    ElencoConti::ContoPtr** searchResult;
+    int numResult;
     bool populateTable();
 };
 

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogEditAccount</class>
+ <widget class="QDialog" name="DialogEditAccount">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>330</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Modifica Conto</string>
+  </property>
+  <widget class="QGroupBox" name="grpBoxOperations">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>381</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Operazioni sul conto</string>
+   </property>
+   <widget class="QWidget" name="formLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>361</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblOpType">
+       <property name="text">
+        <string>Tipo operazione:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="cmbOpType"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblAmount">
+       <property name="text">
+        <string>Importo:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="txtAmount">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="btnExecute">
+    <property name="geometry">
+     <rect>
+      <x>135</x>
+      <y>90</y>
+      <width>114</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Esegui</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="grpEditInfo">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>381</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Modifica Informazioni Intestatario</string>
+   </property>
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>361</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lbInfoName">
+       <property name="text">
+        <string>Nome:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="txtEditName"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblnfoSurname">
+       <property name="text">
+        <string>Cognome:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="txtEditSurname"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="btnEditAccountOwner">
+    <property name="geometry">
+     <rect>
+      <x>135</x>
+      <y>90</y>
+      <width>114</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Modifica</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="lblInfoAccount1">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>11</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Tipo Conto:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblAccountType">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>11</y>
+     <width>301</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>txtEditName</tabstop>
+  <tabstop>txtEditSurname</tabstop>
+  <tabstop>btnEditAccountOwner</tabstop>
+  <tabstop>cmbOpType</tabstop>
+  <tabstop>txtAmount</tabstop>
+  <tabstop>btnExecute</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
