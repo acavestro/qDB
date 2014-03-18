@@ -27,12 +27,14 @@ private slots:
     void on_btnResetFields_clicked();
     void onAccountChanged();
 
+
 private:
     Ui::DialogSearchAccount *ui;
     ElencoConti* el;
-    ElencoConti::ContoPtr** searchResult;
+    Container<Container<ElencoConti::ContoPtr>::Iterator> searchResult;
     int numResult;
     bool populateTable();
+    void clearTable();
 };
 
 #endif // DIALOGSEARCHACCOUNT_H

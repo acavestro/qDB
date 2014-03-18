@@ -26,6 +26,11 @@ MainWindow::~MainWindow()
 void MainWindow::loadElencoContiInfo(){
     ui->lblTotConti->setText(QString::number(elenco->getNumConti()));
     ui->lblSaldoTot->setText(QString::number(elenco->getSaldoTotale()) + " €");
+    if(elenco->getSaldoTotale() < 0){
+        ui->lblSaldoTot->setStyleSheet("color:red;");
+    } else {
+        ui->lblSaldoTot->setStyleSheet("color:black;");
+    }
 }
 
 

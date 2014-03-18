@@ -4,47 +4,47 @@ ElencoConti::ElencoConti(): elenco(new Container<ContoPtr>){}
 
 
 void ElencoConti::addNewContoBancario(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
-    elenco->addItem(new ContoBancario(nomeIntestatario, cognomeIntestatario, saldoIniziale));
+    elenco->push_back(new ContoBancario(nomeIntestatario, cognomeIntestatario, saldoIniziale));
 }
 
 void ElencoConti::addNewContoBancarioIfNotPresent(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
     ContoPtr p = new ContoBancario(nomeIntestatario, cognomeIntestatario, saldoIniziale);
     if(!elenco->contains(p))
-        elenco->addItem(p);
+        elenco->push_back(p);
 }
 
 void ElencoConti::addNewContoCorrente(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
-    elenco->addItem(new ContoCorrente(nomeIntestatario, cognomeIntestatario, saldoIniziale));
+    elenco->push_back(new ContoCorrente(nomeIntestatario, cognomeIntestatario, saldoIniziale));
 }
 
 void ElencoConti::addNewContoCorrenteIfNotPresent(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
     ContoPtr p = new ContoCorrente(nomeIntestatario, cognomeIntestatario, saldoIniziale);
     if(!elenco->contains(p))
-        elenco->addItem(p);
+        elenco->push_back(p);
 }
 
 void ElencoConti::addNewContoRisparmio(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
-    elenco->addItem(new ContoRisparmio(nomeIntestatario, cognomeIntestatario, saldoIniziale));
+    elenco->push_back(new ContoRisparmio(nomeIntestatario, cognomeIntestatario, saldoIniziale));
 }
 
 void ElencoConti::addNewContoRisparmioIfNotPresent(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
     ContoPtr p = new ContoRisparmio(nomeIntestatario, cognomeIntestatario, saldoIniziale);
     if(!elenco->contains(p))
-        elenco->addItem(p);
+        elenco->push_back(p);
 }
 
 /**
  * @param cb è il conto da cancellare
  */
-void ElencoConti::deleteAccount(ContoBancario * cb){
-    elenco->removeItem(cb);
+void ElencoConti::deleteAccount(ContoPtr& cb){
+    elenco->removeElement(cb);
 }
 
 /**
  * @param it è l'iteratore dell'elemento da rimuovere
  */
 void ElencoConti::deleteAccount(Container<ContoPtr>::Iterator it){
-    elenco->removeItem(it);
+    elenco->removeElementAt(it);
 }
 
 
@@ -77,16 +77,17 @@ ElencoConti::ContoPtr* ElencoConti::searchSingleAccount(string namePattern,
 }
 */
 
+/*
 ElencoConti::ContoPtr** ElencoConti::search(int& numResult, string namePattern,
                                                                   string surnamePattern,
                                                                   string balancePattern,
                                                                   double balanceValue) const {
     Container<ElencoConti::ContoPtr*> c;
-    for(Container<ContoPtr>::Iterator it = elenco->begin(); it != elenco->end(); it++){
-        if((*elenco)[it].hasThisName(namePattern) &&
-                (*elenco)[it].hasThisSurname(surnamePattern) &&
-                (*elenco)[it].hasThisBalance(balanceValue, balancePattern)){
-            c.addItem(&((*elenco)[it]));
+    for(int i = 0; i < elenco->getSize(); i++){
+        if((*elenco)[i].hasThisName(namePattern) &&
+                (*elenco)[i].hasThisSurname(surnamePattern) &&
+                (*elenco)[i].hasThisBalance(balanceValue, balancePattern)){
+            c.push_back(&((*elenco)[i]));
         }
     }
     numResult = c.getSize();
@@ -97,6 +98,23 @@ ElencoConti::ContoPtr** ElencoConti::search(int& numResult, string namePattern,
         cit++;
     }
     return vc;
+}
+*/
+Container<Container<ElencoConti::ContoPtr>::Iterator> ElencoConti::search(string namePattern,
+                                                      string surnamePattern,
+                                                      string balancePattern,
+                                                      double balanceValue) const {
+
+
+    Container<Container<ElencoConti::ContoPtr>::Iterator> c;
+    for(int i = 0; i < elenco->getSize(); i++){
+        if((*elenco)[i].hasThisName(namePattern) &&
+                (*elenco)[i].hasThisSurname(surnamePattern) &&
+                (*elenco)[i].hasThisBalance(balanceValue, balancePattern)){
+            c.push_back(i);
+        }
+    }
+    return c;
 }
 
 double ElencoConti::getCommissioneDepositoCC() {
@@ -113,10 +131,14 @@ int ElencoConti::getNumConti() const {
 
 double ElencoConti::getSaldoTotale() const {
     double saldoTot = 0;
-    for(Container<ContoPtr>::ConstIterator it = elenco->begin(); it != elenco->end(); it++){
-        saldoTot += (*it)->getSaldo();
+    for(int i = 0; i < elenco->getSize(); i++){
+        saldoTot += ((*elenco)[i])->getSaldo();
     }
     return saldoTot;
+}
+
+ElencoConti::ContoPtr* ElencoConti::getAccount(Container<ElencoConti::ContoPtr>::Iterator i){
+    return &((*elenco)[i]);
 }
 
 /**

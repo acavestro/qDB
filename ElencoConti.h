@@ -81,7 +81,7 @@ public:
     /**
      * @brief Cancella un ContoBancario
      */
-    void deleteAccount(ContoBancario *);
+    void deleteAccount(ContoPtr&);
     /**
      * @brief Cancella dall'elenco il ContoBancario
      * puntato dall'iteratore passato come parametro.
@@ -95,11 +95,12 @@ public:
      * parametri. Se non ci sono occorrenze ritorna 0;
      */
     //ContoPtr* searchSingleAccount(string ="*", string ="*", string = "*", double =0.0);
-    ElencoConti::ContoPtr** search(int&, string ="*", string="*", string="*", double=0.0) const;
+    Container<Container<ElencoConti::ContoPtr>::Iterator> search(string ="*", string="*", string="*", double=0.0) const;
     static double getCommissionePrelievoCC();
     static double getCommissioneDepositoCC();
     int getNumConti() const;
     double getSaldoTotale() const;
+    ContoPtr* getAccount(Container<ElencoConti::ContoPtr>::Iterator);
 
 private:
     Container<ContoPtr>* elenco;

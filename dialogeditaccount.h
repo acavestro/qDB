@@ -1,6 +1,7 @@
 #ifndef DIALOGEDITACCOUNT_H
 #define DIALOGEDITACCOUNT_H
 #include "ElencoConti.h"
+#include "Container.h"
 #include <QDialog>
 
 namespace Ui {
@@ -14,7 +15,8 @@ class DialogEditAccount : public QDialog
 public:
     explicit DialogEditAccount(QWidget *parent = 0);
     ~DialogEditAccount();
-    void bindAccount(ElencoConti::ContoPtr*);
+    void bindData(Container<ElencoConti::ContoPtr>::Iterator, ElencoConti*);
+    void bindElenco(ElencoConti*);
 
 signals:
     void accountChanged();
@@ -25,11 +27,16 @@ private slots:
 
     void on_btnExecute_clicked();
 
+    void on_btnDeleteAccount_clicked();
+
 private:
     Ui::DialogEditAccount *ui;
+    Container<ElencoConti::ContoPtr>::Iterator itAccount;
     ElencoConti::ContoPtr* account;
+    ElencoConti* elenco;
     enum CB_TYPE_OPERATION_ID { PICKUP, DEPOSIT };
     void populateDialog();
+    void loadBalance();
     bool editAccountOwner();
     bool operation();
 };

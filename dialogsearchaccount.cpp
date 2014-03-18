@@ -18,13 +18,16 @@ DialogSearchAccount::DialogSearchAccount(QWidget *parent) :
 
 DialogSearchAccount::~DialogSearchAccount()
 {
-    delete[] searchResult;
     delete ui;
 }
 
 void DialogSearchAccount::bindElenco(ElencoConti * e){
     el = e;
     populateTable();
+}
+
+void DialogSearchAccount::clearTable(){
+    ui->tblSearchResult->setRowCount(0);
 }
 
 bool DialogSearchAccount::populateTable() {
@@ -39,41 +42,41 @@ bool DialogSearchAccount::populateTable() {
         err.exec();
         return false;
     } else {
-        delete[] searchResult;
-        searchResult = el->search(numResult, name.toStdString(), surname.toStdString(), balancePattern.toStdString(), balance);
+        clearTable();
+        searchResult = el->search(name.toStdString(), surname.toStdString(), balancePattern.toStdString(), balance);
+        numResult = searchResult.getSize();
         if (numResult > 0){
-            int row = 0, col;
+            int col;
 
             for(int i = 0; i < numResult; i++){
-                ElencoConti::ContoPtr* cp = searchResult[i];
-                ui->tblSearchResult->setRowCount(row+1);
+                ElencoConti::ContoPtr* cp = el->getAccount(searchResult[i]);
+                ui->tblSearchResult->setRowCount(i+1);
                 col = 0;
 
                 QTableWidgetItem *newItem = new QTableWidgetItem(QString::fromStdString((*cp)->getTipoConto()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-                ui->tblSearchResult->setItem(row, col, newItem);
+                ui->tblSearchResult->setItem(i, col, newItem);
                 col++;
 
                 newItem = new QTableWidgetItem(QString::fromStdString((*cp)->getNome()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-                ui->tblSearchResult->setItem(row, col, newItem);
+                ui->tblSearchResult->setItem(i, col, newItem);
                 col++;
 
                 newItem = new QTableWidgetItem(QString::fromStdString((*cp)->getCognome()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-                ui->tblSearchResult->setItem(row, col, newItem);
+                ui->tblSearchResult->setItem(i, col, newItem);
                 col++;
 
                 newItem = new QTableWidgetItem(QString::number((*cp)->getSaldo()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
-                ui->tblSearchResult->setItem(row, col, newItem);
+                ui->tblSearchResult->setItem(i, col, newItem);
                 col++;
 
                 //QPushButton* btn = new QPushButton("Modifica");
                 //connect(btn, SIGNAL(clicked()), this, SLOT(on_btnModifica_clicked()));
                 //ui->tblSearchResult->setCellWidget(row, col, btn);
                 //col++;
-                row++;
             }
         } else {
             /*
@@ -101,7 +104,7 @@ void DialogSearchAccount::openConto(int row){
     dlg.exec();*/
 
     DialogEditAccount* dea = new DialogEditAccount;
-    dea->bindAccount(searchResult[row]);
+    dea->bindData(searchResult[row], el);
     connect(dea, SIGNAL(accountChanged()), this, SLOT(onAccountChanged()));
     connect(dea, SIGNAL(operationMaked()), this, SLOT(onAccountChanged()));
     dea->show();
