@@ -20,21 +20,23 @@ DialogEditAccount::~DialogEditAccount()
 void DialogEditAccount::bindData(Container<ElencoConti::ContoPtr>::Iterator it, ElencoConti* ec){
     itAccount = it;
     elenco = ec;
-    account = elenco->getAccount(itAccount);
+    //account = elenco->getAccount(itAccount);
     populateDialog();
 
 }
 
 void DialogEditAccount::populateDialog(){
-    ui->lblAccountType->setText(QString::fromStdString((*account)->getTipoConto()));
+    ElencoConti::ContoPtr& acc = elenco->getAccount(itAccount);
+    ui->lblAccountType->setText(QString::fromStdString(acc->getTipoConto()));
     loadBalance();
-    ui->txtEditName->setText(QString::fromStdString((*account)->getNome()));
-    ui->txtEditSurname->setText(QString::fromStdString((*account)->getCognome()));
+    ui->txtEditName->setText(QString::fromStdString(acc->getNome()));
+    ui->txtEditSurname->setText(QString::fromStdString(acc->getCognome()));
 }
 
 void DialogEditAccount::loadBalance(){
-    ui->lblBalance->setText(QString::number((*account)->getSaldo()));
-    if((*account)->getSaldo() < 0){
+    ElencoConti::ContoPtr& acc = elenco->getAccount(itAccount);
+    ui->lblBalance->setText(QString::number(acc->getSaldo()));
+    if(acc->getSaldo() < 0){
         ui->lblBalance->setStyleSheet("color: red;");
     } else {
         ui->lblBalance->setStyleSheet("color: black;");
@@ -50,8 +52,9 @@ bool DialogEditAccount::editAccountOwner(){
         err.exec();
         return false;
     }
-    (*account)->setNome(newName.toStdString());
-    (*account)->setCognome(newSurname.toStdString());
+    ElencoConti::ContoPtr& acc = elenco->getAccount(itAccount);
+    acc->setNome(newName.toStdString());
+    acc->setCognome(newSurname.toStdString());
     QMessageBox dlg;
     dlg.setText("Dati intestatario modificati con successo");
     dlg.exec();
@@ -67,11 +70,12 @@ void DialogEditAccount::on_btnEditAccountOwner_clicked()
 bool DialogEditAccount::operation(){
     bool isAmountADouble;
     double amount = ui->txtAmount->text().toDouble(&isAmountADouble);
-    if(isAmountADouble){
+    if(isAmountADouble && amount >= 0){
+        ElencoConti::ContoPtr& acc = elenco->getAccount(itAccount);
         int opType = ui->cmbOpType->currentIndex();
         if(opType == PICKUP){
-            double previousBalance = (*account)->getSaldo();
-            double newBalance = (*account)->preleva(amount);
+            double previousBalance = acc->getSaldo();
+            double newBalance = acc->preleva(amount);
             if(previousBalance == newBalance){
                 QMessageBox err;
                 err.setText("Saldo insufficiente per completare l'operazione");
@@ -79,7 +83,7 @@ bool DialogEditAccount::operation(){
                 return false;
             }
         } else if (opType == DEPOSIT){
-            (*account)->deposita(amount);
+            acc->deposita(amount);
         } else {
             QMessageBox err;
             err.setText("Si è verificato un errore nell'esecuzione dell'operazione");
@@ -104,6 +108,7 @@ void DialogEditAccount::on_btnExecute_clicked()
     if(result){
         populateDialog();
         emit operationMaked();
+        //qDebug() << "Signal operationMaked() emesso" << endl;
     }
 }
 

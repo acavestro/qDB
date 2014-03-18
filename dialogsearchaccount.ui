@@ -19,6 +19,9 @@
      <property name="text">
       <string>Attraverso i campi di ricerca sottostanti è possibile filtrare i conti visualizzati.</string>
      </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item>

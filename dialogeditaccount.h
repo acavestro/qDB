@@ -32,7 +32,7 @@ private slots:
 private:
     Ui::DialogEditAccount *ui;
     Container<ElencoConti::ContoPtr>::Iterator itAccount;
-    ElencoConti::ContoPtr* account;
+    //ElencoConti::ContoPtr* account;
     ElencoConti* elenco;
     enum CB_TYPE_OPERATION_ID { PICKUP, DEPOSIT };
     void populateDialog();

@@ -100,7 +100,7 @@ public:
     static double getCommissioneDepositoCC();
     int getNumConti() const;
     double getSaldoTotale() const;
-    ContoPtr* getAccount(Container<ElencoConti::ContoPtr>::Iterator);
+    ContoPtr& getAccount(Container<ElencoConti::ContoPtr>::Iterator);
 
 private:
     Container<ContoPtr>* elenco;

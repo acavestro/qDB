@@ -137,8 +137,8 @@ double ElencoConti::getSaldoTotale() const {
     return saldoTot;
 }
 
-ElencoConti::ContoPtr* ElencoConti::getAccount(Container<ElencoConti::ContoPtr>::Iterator i){
-    return &((*elenco)[i]);
+ElencoConti::ContoPtr& ElencoConti::getAccount(Container<ElencoConti::ContoPtr>::Iterator i){
+    return (*elenco)[i];
 }
 
 /**

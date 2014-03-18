@@ -49,26 +49,26 @@ bool DialogSearchAccount::populateTable() {
             int col;
 
             for(int i = 0; i < numResult; i++){
-                ElencoConti::ContoPtr* cp = el->getAccount(searchResult[i]);
+                ElencoConti::ContoPtr& cp = el->getAccount(searchResult[i]);
                 ui->tblSearchResult->setRowCount(i+1);
                 col = 0;
 
-                QTableWidgetItem *newItem = new QTableWidgetItem(QString::fromStdString((*cp)->getTipoConto()));
+                QTableWidgetItem *newItem = new QTableWidgetItem(QString::fromStdString(cp->getTipoConto()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 ui->tblSearchResult->setItem(i, col, newItem);
                 col++;
 
-                newItem = new QTableWidgetItem(QString::fromStdString((*cp)->getNome()));
+                newItem = new QTableWidgetItem(QString::fromStdString(cp->getNome()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 ui->tblSearchResult->setItem(i, col, newItem);
                 col++;
 
-                newItem = new QTableWidgetItem(QString::fromStdString((*cp)->getCognome()));
+                newItem = new QTableWidgetItem(QString::fromStdString(cp->getCognome()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 ui->tblSearchResult->setItem(i, col, newItem);
                 col++;
 
-                newItem = new QTableWidgetItem(QString::number((*cp)->getSaldo()));
+                newItem = new QTableWidgetItem(QString::number(cp->getSaldo()));
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 ui->tblSearchResult->setItem(i, col, newItem);
                 col++;
@@ -139,6 +139,7 @@ void DialogSearchAccount::on_btnResetFields_clicked()
 }
 
 void DialogSearchAccount::onAccountChanged(){
+    //qDebug() << "Signal ricevuto!" << endl;
     populateTable();
     emit infoElencoChanged();
 }

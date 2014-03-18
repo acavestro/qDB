@@ -440,7 +440,7 @@ void Container<K>::insertElementAt(const K& item, Iterator pos){
 template <class K>
 int Container<K>::position(const K& item) const{
     bool found = false;
-    int pos;
+    int pos = -1;
     for(int i = 0; !found && i < size; i++){
         if(item == vector[i]->info){
             found = true;
