@@ -2,6 +2,10 @@
 
 ElencoConti::ElencoConti(): elenco(new Container<ContoPtr>){}
 
+ElencoConti::~ElencoConti(){
+    delete elenco;
+}
+
 
 void ElencoConti::addNewContoBancario(string nomeIntestatario, string cognomeIntestatario, double saldoIniziale){
     elenco->push_back(new ContoBancario(nomeIntestatario, cognomeIntestatario, saldoIniziale));
@@ -54,52 +58,6 @@ void ElencoConti::deleteAccount(Container<ContoPtr>::Iterator it){
  * @param balancePattern è il pattern del saldo (=, >, >=, <, <=)
  * @param balanceValue è il valore su cui applicare il pattern del saldo
  */
-/*
-ElencoConti::ContoPtr* ElencoConti::searchSingleAccount(string namePattern,
-                                           string surnamePattern,
-                                           string balancePattern,
-                                           double balanceValue){
-    bool found = false;
-    Container<ContoPtr>::Iterator itToReturn;
-    for(Container<ContoPtr>::Iterator it = elenco->begin();
-        !found && it!=elenco->end(); it++) {
-        if((*elenco)[it].hasThisName(namePattern) &&
-                (*elenco)[it].hasThisSurname(surnamePattern) &&
-                (*elenco)[it].hasThisBalance(balanceValue, balancePattern)){
-            found = true;
-            itToReturn = it;
-        }
-    }
-    if (found)
-        return &((*elenco)[itToReturn]);
-    else
-        return 0;
-}
-*/
-
-/*
-ElencoConti::ContoPtr** ElencoConti::search(int& numResult, string namePattern,
-                                                                  string surnamePattern,
-                                                                  string balancePattern,
-                                                                  double balanceValue) const {
-    Container<ElencoConti::ContoPtr*> c;
-    for(int i = 0; i < elenco->getSize(); i++){
-        if((*elenco)[i].hasThisName(namePattern) &&
-                (*elenco)[i].hasThisSurname(surnamePattern) &&
-                (*elenco)[i].hasThisBalance(balanceValue, balancePattern)){
-            c.push_back(&((*elenco)[i]));
-        }
-    }
-    numResult = c.getSize();
-    ElencoConti::ContoPtr** vc = new ElencoConti::ContoPtr*[numResult];
-    Container<ContoPtr*>::ConstIterator cit = c.begin();
-    for(int i = 0; i < numResult; i++){
-        vc[i] = *cit;
-        cit++;
-    }
-    return vc;
-}
-*/
 Container<Container<ElencoConti::ContoPtr>::Iterator> ElencoConti::search(string namePattern,
                                                       string surnamePattern,
                                                       string balancePattern,

@@ -47,7 +47,13 @@ public:
      * del ContoRisparmio.
      */
     string toString() const;
+    /**
+     * Operatore di uguaglianza.
+     */
     bool operator==(const ContoBancario&) const;
+    /**
+     * Tipologia di conto.
+     */
     string getTipoConto() const;
 };
 

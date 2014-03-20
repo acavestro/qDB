@@ -2,8 +2,6 @@
 #include "ui_dialogsearchaccount.h"
 #include "QString"
 #include "QMessageBox"
-#include "QSignalMapper"
-#include "QDebug"
 #include "dialogeditaccount.h"
 #include <Container.h>
 
@@ -72,18 +70,8 @@ bool DialogSearchAccount::populateTable() {
                 newItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
                 ui->tblSearchResult->setItem(i, col, newItem);
                 col++;
-
-                //QPushButton* btn = new QPushButton("Modifica");
-                //connect(btn, SIGNAL(clicked()), this, SLOT(on_btnModifica_clicked()));
-                //ui->tblSearchResult->setCellWidget(row, col, btn);
-                //col++;
             }
         } else {
-            /*
-            QMessageBox dlg;
-            dlg.setText("Nessun elemento trovato!");
-            dlg.exec();
-            */
             return false;
         }
     }
@@ -91,18 +79,6 @@ bool DialogSearchAccount::populateTable() {
 }
 
 void DialogSearchAccount::openConto(int row){
-    /*
-    int rCont = 0;
-    Container<ElencoConti::ContoPtr*>::Iterator it;
-    for(it = searchResult->begin(); rCont < row && it != searchResult->end(); it++){
-        rCont++;
-    }
-
-    QMessageBox dlg;
-    //dlg.setText(QString::fromStdString(cp->getNome()));
-    dlg.setText(QString::fromStdString((*searchResult)[it]->getNome()));
-    dlg.exec();*/
-
     DialogEditAccount* dea = new DialogEditAccount;
     dea->bindData(searchResult[row], el);
     connect(dea, SIGNAL(accountChanged()), this, SLOT(onAccountChanged()));
@@ -139,7 +115,6 @@ void DialogSearchAccount::on_btnResetFields_clicked()
 }
 
 void DialogSearchAccount::onAccountChanged(){
-    //qDebug() << "Signal ricevuto!" << endl;
     populateTable();
     emit infoElencoChanged();
 }

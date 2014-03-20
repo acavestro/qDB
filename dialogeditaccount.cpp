@@ -1,7 +1,6 @@
 #include "dialogeditaccount.h"
 #include "ui_dialogeditaccount.h"
 #include "QMessageBox"
-#include "QDebug"
 
 DialogEditAccount::DialogEditAccount(QWidget *parent) :
     QDialog(parent),
@@ -20,7 +19,6 @@ DialogEditAccount::~DialogEditAccount()
 void DialogEditAccount::bindData(Container<ElencoConti::ContoPtr>::Iterator it, ElencoConti* ec){
     itAccount = it;
     elenco = ec;
-    //account = elenco->getAccount(itAccount);
     populateDialog();
 
 }
@@ -108,7 +106,6 @@ void DialogEditAccount::on_btnExecute_clicked()
     if(result){
         populateDialog();
         emit operationMaked();
-        //qDebug() << "Signal operationMaked() emesso" << endl;
     }
 }
 

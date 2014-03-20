@@ -1,7 +1,5 @@
 #include "ContoRisparmio.h"
-#include <string>
 #include <sstream>
-using std::string;
 
 ContoRisparmio::ContoRisparmio(): ContoBancario() {}
 
@@ -20,7 +18,6 @@ ContoRisparmio::ContoRisparmio(const ContoRisparmio & cr): ContoBancario(cr) {}
  * @param cifraPrelevata è la cifra da prelevare.
  */
 double ContoRisparmio::preleva(double cifraPrelevata){
-    //attenzione eccezione cifraPrelevata > 0
     if(cifraPrelevata <= getSaldo()){
         return ContoBancario::preleva(cifraPrelevata);
     } else {

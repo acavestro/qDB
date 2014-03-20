@@ -15,7 +15,6 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void loadElencoContiInfo();
 
 private slots:
     void on_btnAddAccount_clicked();
@@ -25,6 +24,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     ElencoConti *elenco;
+    void loadElencoContiInfo();
 };
 
 #endif // MAINWINDOW_H

@@ -2,7 +2,6 @@
 #include "ui_dialogaddaccount.h"
 #include "QMessageBox"
 #include "QString"
-#include "QDebug"
 
 DialogAddAccount::DialogAddAccount(QWidget *parent) :
     QDialog(parent),

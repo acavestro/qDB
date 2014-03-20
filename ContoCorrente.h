@@ -26,7 +26,15 @@ public:
      * @brief Costruttore di copia
      */
     ContoCorrente(const ContoCorrente&);
+    /**
+     * Commissione di prelievo.
+     * @return Un valore double rappresentante la commissione di prelievo.
+     */
     static double getCommissionePrelievo();
+    /**
+     * Commissione di deposito.
+     * @return Un valore double rappresentante la commissione di deposito.
+     */
     static double getCommissioneDeposito();
     //metodi virtuali
     /**
@@ -52,7 +60,13 @@ public:
      * del ContoCorrente.
      */
     string toString() const;
+    /**
+     * Operatore di uguaglianza
+     */
     bool operator==(const ContoBancario&) const;
+    /**
+     * Tipologia di conto.
+     */
     string getTipoConto() const;
 private:
     static double commissionePrelievo;

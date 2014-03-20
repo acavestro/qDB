@@ -15,10 +15,18 @@ class DialogSearchAccount : public QDialog
 public:
     explicit DialogSearchAccount(QWidget *parent = 0);
     ~DialogSearchAccount();
+    /**
+     * Collega l'ElencoConti alla finestra di ricerca.
+     * Necessario per poter accedere ai conti per poter
+     * cercare tra di loro.
+     */
     void bindElenco(ElencoConti*);
-    void openConto(int);
 
 signals:
+    /**
+     * Segnale emesso quando alcune informazioni dell'elenco
+     * sono cambiate, rendendo necessario rieseguire la ricerca.
+     */
     void infoElencoChanged();
 
 private slots:
@@ -35,6 +43,7 @@ private:
     int numResult;
     bool populateTable();
     void clearTable();
+    void openConto(int);
 };
 
 #endif // DIALOGSEARCHACCOUNT_H

@@ -84,6 +84,10 @@ public:
      * quelli dell'oggetto d'istanza, altrimenti false.
      */
     virtual bool operator==(const ContoBancario&) const;
+    /**
+     * Tipologia di conto.
+     * @return Un valore di tipo string rappresentante il tipo di conto.
+     */
     virtual string getTipoConto() const;
 private:
 
